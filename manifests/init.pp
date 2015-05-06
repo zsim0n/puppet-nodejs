@@ -57,7 +57,7 @@ class nodejs(
   file { '/etc/profile.d/nodejs-path.sh' :
     ensure  => present,
     mode    => 644,
-    content => template('zsim0n-nodejs/templates/nodejs-path.sh.erb'),
+    content => template('nodejs/templates/nodejs-path.sh.erb'),
     owner   => 'vagrant',
     group   => 'vagrant',
   }
