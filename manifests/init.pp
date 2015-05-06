@@ -35,7 +35,31 @@
 #
 # Copyright 2015 Your name here, unless otherwise noted.
 #
+
 class nodejs {
-
-
+  $repo_version = $nodejs::params::repo_version,
+  
+  if ! defined(Package['curl']) {
+      package { 'curl':
+          ensure  => present,
+      }
+  }  
+  exec {'nodejs-before-install': 
+    command => "/usr/bin/curl -sL https://deb.nodesource.com/setup_$repo_version | sudo bash -",
+    require => Package['curl'],
+  }->
+  package { 'nodejs' :
+    ensure  => 'present',
+  }->
+  exec { 'nodejs-after-install':
+    command => 'npm install -g npm && sudo npm -g config set prefix /home/vagrant/npm',
+  }->
+  file { '/etc/profile.d/nodejs-path.sh' :
+    ensure  => present,
+    mode    => 644,
+    content => template('zsim0n-nodejs/templates/nodejs-path.sh.erb'),
+    owner   => 'vagrant',
+    group   => 'vagrant',
+  }
 }
+
