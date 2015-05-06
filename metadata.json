@@ -1,0 +1,14 @@
+{
+  "name": "zsim0n-nodejs",
+  "version": "0.1.0",
+  "author": "zsim0n",
+  "summary": "Simple NodeJs module",
+  "license": "Apache 2.0",
+  "source": "https://github.com/zsim0n/puppet-nodejs.git",
+  "project_page": "https://github.com/zsim0n/puppet-nodejs",
+  "issues_url": "https://github.com/zsim0n/puppet-nodejs/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ]
+}
+
