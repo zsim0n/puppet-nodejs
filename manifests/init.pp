@@ -36,9 +36,9 @@
 # Copyright 2015 Your name here, unless otherwise noted.
 #
 
-class nodejs {
+class nodejs(
   $repo_version = $nodejs::params::repo_version,
-  
+) inherits nodejs::params {
   if ! defined(Package['curl']) {
       package { 'curl':
           ensure  => present,
