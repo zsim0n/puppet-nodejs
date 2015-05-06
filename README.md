@@ -15,65 +15,64 @@
 
 ## Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves.
-This is your 30 second elevator pitch for your module. Consider including
-OS/Puppet version it works with.
+Ran out of time fixing the official [Puppetlabs](https://forge.puppetlabs.com/puppetlabs/nodejs) module. So I come up this Super Simple Module for installing NodeJS with the [Official](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager) method.
+It tend to be working on Debian / Ubuntu environment. Somehow latest:
+
+* Mac OS X 10.10.3
+* Vagrant 1.7.2
+* VirtualBox 4..
+* Puppet
+* Librarian Puppet
+* Ubuntu 14.04
+
 
 ## Module Description
 
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
-
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
 
 ## Setup
 
 ### What nodejs affects
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
+* Checks and install `curl`if necessary
+* Installs `nodejs`via `apt` 
+* Updates `npm`to the latest and configure it to use `/home/vagrant/npm` folder 
+* Add `nodejs`pathes to `profile.d`
+* Register `npm` provider so you can do the following:
 
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
+```
+package { 'yo':
+  ensure => 'present',
+  provider => 'npm',
+}
+```
 
 ### Beginning with nodejs
 
-The very basic steps needed for a user to get the module up and running.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you may wish to include an additional section here: Upgrading
-(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+```
+class {'nodejs:'}
+```
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+```
+class {'nodejs:'
+    repo_version => '0.10',
+}
+```
 
 ## Reference
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+npm provider has been reused from [Puppetlabs](https://forge.puppetlabs.com/puppetlabs/nodejs) module.
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+Tested only on Ubuntu 14.04
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
+Feel free to use/fork report issues
 
-## Release Notes/Contributors/Etc **Optional**
+## Release Notes/Contributors/Etc 
 
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You may also add any additional sections you feel are
-necessary or important to include here. Please use the `## ` header.
+0.1.0 Initial and might be the final release
+
